@@ -1,7 +1,7 @@
-import { readFileSync as read} from "node:fs";
-import { fileURLToPath as toPath} from "node:url";
-import { dirname as dirOf, join as joinPath} from "node:path";
+// roast-gadget entry: print the one-line entry from entry.txt
+// The entry is a single line; trailing whitespace is trimmed before printing.
+import { readFileSync } from "node:fs";
 
-const here = dirOf(toPath(import.meta.url));
-const report = read(joinPath(here, "entry.txt"), "utf8").trim();
-console.log(report);
+const entryPath = new URL("./entry.txt", import.meta.url);
+const line = readFileSync(entryPath, "utf8").trim();
+console.log(line);
