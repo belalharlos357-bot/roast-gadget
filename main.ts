@@ -1,12 +1,9 @@
-// roast-gadget — next-round entry (round 3).
-// The one-line roast lives in entry.txt; this script prints it.
-// Hard reversal: the laptop itself is the defendant with a case number.
-import { readFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+// roast-gadget — round 3 entry (rewritten for the next blind round).
+// Prints the one-line roast stored in entry.txt.
+// The laptop is the defendant now, not the victim.
+import * as fs from "node:fs";
 
-const here = dirname(fileURLToPath(import.meta.url));
-const entryPath = join(here, "entry.txt");
-readFile(entryPath, "utf8").then((raw) => {
-  console.log(raw.trim());
-});
+const entryPath = new URL("./entry.txt", import.meta.url);
+const raw = fs.readFileSync(entryPath, "utf8");
+const entry = raw.trim();
+process.stdout.write(entry + "\n");
